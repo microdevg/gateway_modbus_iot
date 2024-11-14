@@ -10,3 +10,22 @@ Este prototipo está basado en los siguientes repositorios:
 
 
 - **Modbus Api**: Interfaz Modbus sencilla basado en callbacks y peticiones en queues. Link:[repo](https://github.com/microdevg/modbus_api_simple).
+
+
+
+### Frontedn simple con python en entorno virtual
+
+En la carpeta frontend se encuenta el programa client.py que sirve para realizar pruebas. El mismo depende de paho-mqtt.
+Para instalar esta libreria :
+```bash
+    pip install paho-mqtt
+        
+        
+```
+Se recomienda usar un entorno virtual:
+```bash
+    python3 -m venv .venv
+    source .venv/Scripts/activate
+
+    python client.py
+```

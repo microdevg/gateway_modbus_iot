@@ -16,10 +16,6 @@
 
 
 
-
-
-
-
 char mb_rsp[1024]={0};
 int enable = 0;
 
@@ -150,6 +146,7 @@ void mqtt_data_cb(char* data, char* topic){
 void mqtt_connected_cb(){
     printf("\n[MQTT] Se conecto al servidor %s\n",MQTT_URL);
     mqtt_subcribe(MQTT_TOPIC_SUB, 2);
+    mqtt_publish(MQTT_TOPIC_PUB,"Dispositivo conectado\n",2,0);
     enable = 1;
     // Inicio la interfaz modbus
     esp_err_t err = modbus_api_config(&modbus_cfg,server_iot);

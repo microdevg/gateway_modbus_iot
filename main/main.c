@@ -11,6 +11,7 @@
 #define MQTT_URL                        "mqtt://test.mosquitto.org"
 #define MQTT_TOPIC_SUB                  "MODBUS_REQUEST"
 #define MQTT_TOPIC_PUB                  "MODBUS_RESPONSE"
+#define MQTT_TOPIC_HELLO                "MODBUS_HELLO"
 #define ADDRESS_SLAVE                   1
 #define BAUDRATE                        115200
 
@@ -146,7 +147,7 @@ void mqtt_data_cb(char* data, char* topic){
 void mqtt_connected_cb(){
     printf("\n[MQTT] Se conecto al servidor %s\n",MQTT_URL);
     mqtt_subcribe(MQTT_TOPIC_SUB, 2);
-    mqtt_publish(MQTT_TOPIC_PUB,"Dispositivo conectado\n",2,0);
+    mqtt_publish("ESP32 READY",MQTT_TOPIC_HELLO,2,0);
     enable = 1;
     // Inicio la interfaz modbus
     esp_err_t err = modbus_api_config(&modbus_cfg,server_iot);

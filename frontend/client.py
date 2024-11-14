@@ -3,6 +3,7 @@ import paho.mqtt.client as mqtt
 # Definir los tópicos
 request_topic = "MODBUS_REQUEST"
 response_topic = "MODBUS_RESPONSE"
+hello_topic  = "MODBUS_HELLO"
 
 import time
 
@@ -24,11 +25,17 @@ def on_connect(client, userdata, flags, rc):
     print(f"Conectado con código de resultado: {rc}")
     # Suscribirse a los tópicos después de la conexión
     client.subscribe(response_topic)
+    client.subscribe(hello_topic)
+
     # Publicar un mensaje en los dos tópicos
-|1
+
 
 # Callback cuando se recibe un mensaje en un tópico
 def on_message(client, userdata, msg):
+
+    if(msg.topic == hello_topic):
+        print(f"\n\t\t[modbus_ready] {msg.payload.decode()}\n")
+        return
     print(f"[modbus_response] {msg.payload.decode()}")
 
 # Crear el cliente MQTT

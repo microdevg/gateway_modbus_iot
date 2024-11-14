@@ -1,2 +1,11 @@
-idf_component_register(SRCS "flash_mem.c" "portal_wifi_ap.c" "api_config.c" "main.c" "wifi.c"
-                    INCLUDE_DIRS "." "./include")
+idf_component_register(SRCS "flash_mem.c" 
+                            "portal_wifi_ap.c"
+                            "api_config.c"
+                            "main.c"
+                            "wifi.c"
+                            "modbus_api.c"
+                            "mqtt.c"
+                    INCLUDE_DIRS "." 
+                    "./include"
+                    "${IDF_PATH}/examples/protocols/modbus/mb_example_common/include"
+                    )

@@ -41,6 +41,7 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
     case MQTT_EVENT_DISCONNECTED:
         CHECK_RUN_F(_on_disconn);
         break;
+
     case MQTT_EVENT_SUBSCRIBED:
         printf("\nSubscripcion correcta\n");
         break;
@@ -53,13 +54,16 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
     case MQTT_EVENT_DATA:
         int len_d = event->data_len;
         int len_t = event->topic_len;
-        char b_data[100]={0};
-        char b_topic[100]={0};
+        static char b_data[100]={0};
+        static char b_topic[100]={0};
+        
         strncpy(b_data,event->data,len_d); 
         strncpy(b_topic,event->topic,len_d);
         b_data[len_d]= 0;
         b_topic[len_t]= 0;
         if(_on_received_data !=NULL)_on_received_data(b_data,b_topic);
+     
+    
         break;
 
     case MQTT_EVENT_ERROR:
@@ -71,8 +75,11 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
             printf("Last errno string (%s)", strerror(event->error_handle->esp_transport_sock_errno));
         }
         break;
+    case MQTT_EVENT_BEFORE_CONNECT:
+        printf("Evento no soportado:%d\n", event->event_id);
+        break;
     default:
-        printf("Evento no soportado:%d", event->event_id);
+        printf("Evento no soportado:\n");
         break;
     }
 }
@@ -85,6 +92,8 @@ esp_err_t mqtt_init(const char* uri, esp_callback_t conn, esp_callback_t disconn
 
     esp_mqtt_client_config_t mqtt_cfg = {
         .broker.address.uri = uri,
+   
+
     };
     _client = esp_mqtt_client_init(&mqtt_cfg);
     esp_mqtt_client_register_event(_client, ESP_EVENT_ANY_ID, mqtt_event_handler, NULL);

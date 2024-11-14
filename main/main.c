@@ -2,12 +2,13 @@
 #include "freertos/task.h"
 #include "api_config.h"
 #include <modbus_api.h>
+
 #include "mqtt.h"
 
 
 
 
-#define MQTT_URL                        "mqtt://broker.hivemq.com"
+#define MQTT_URL                        "mqtt://test.mosquitto.org"
 #define MQTT_TOPIC_SUB                  "MODBUS_REQUEST"
 #define MQTT_TOPIC_PUB                  "MODBUS_RESPONSE"
 #define ADDRESS_SLAVE                   1
@@ -83,8 +84,12 @@ void server_iot(    mb_param_request_t* req, void* buff,size_t len, bool ok){
         sprintf(&(mb_rsp[strlen(mb_rsp)]),"| %d ", b[counter]);
     }
     sprintf(&(mb_rsp[strlen(mb_rsp)]),"|\n ");
+    printf(mb_rsp);
+
+
     mqtt_publish(mb_rsp,MQTT_TOPIC_PUB,2,0);
     mb_rsp[0]=0;
+
 }
 
 
@@ -132,6 +137,9 @@ void mqtt_data_cb(char* data, char* topic){
         vTaskDelay(100/portTICK_PERIOD_MS);
     } else {
         printf("%s 0>Error al parsear el buffer.\n",data);
+        mqtt_publish("Formato de peticion erroneo\n",MQTT_TOPIC_PUB,2,0);
+
+
     }
     
 }

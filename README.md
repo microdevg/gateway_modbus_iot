@@ -6,4 +6,7 @@ Interfaz Modbus controlable mediante tópicos MQTT.
 
 Este prototipo está basado en los siguientes repositorios:
 
-- **Portal WiFi**: Interfaz web para configurar credenciales WiFi. Repositorio disponible en [wifi_manager_portal](https://github.com/microdevg/wifi_manager_portal.git).
+- **Portal WiFi**: Interfaz web para configurar credenciales WiFi. Link: [repo](https://github.com/microdevg/wifi_manager_portal.git).
+
+
+- **Modbus Api**: Interfaz Modbus sencilla basado en callbacks y peticiones en queues. Link:[repo](https://github.com/microdevg/modbus_api_simple).

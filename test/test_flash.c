@@ -45,3 +45,39 @@ char pass[20]={0};
     esp_err_t  err = flash_mem_save( id, pass);
     TEST_ASSERT_EQUAL(ESP_OK,err);
 }
+
+
+
+void test_flash_mem_save_check_params(){
+    
+    nvs_handle_t* nvs_handle =get_phandle();
+    #define BUFFER_LEN  20
+    char id[BUFFER_LEN]={0}; 
+    char pass[BUFFER_LEN*2]={0};
+    // Inicio la prueba
+    // flash_init devolvera ESP_OK 
+    nvs_flash_init_ExpectAndReturn(ESP_OK);
+    // nvs_open devolvera ESP_OK
+    nvs_open_ExpectAndReturn(PARTITION_NAME,NVS_READWRITE,nvs_handle,ESP_OK);
+    // nvs_open devolvera ESP_OK
+    nvs_set_str_ExpectAndReturn((*nvs_handle),SSID_KEY,id,ESP_OK);
+    //nvs_open por segunda vez devolvera ESP_OK
+    nvs_set_str_ExpectAndReturn((*nvs_handle),PASSWORD_KEY,pass,ESP_OK);
+    //nvs_commit devolvera ESP_OK
+    nvs_commit_ExpectAndReturn(*nvs_handle,ESP_OK);
+    //nvs_close no devolvera nada, 
+    //solo verifico que se llamo
+    nvs_close_Expect((*nvs_handle));
+
+    /**
+         * @brief Las condiciones que le impongo a flash_mem_save
+         *  Debe llamarse a flashinit y esta debe devolver ESP_OK
+         *  Debe llamarse a nvs_open y esta debe devolver ESP_OK
+         *  Debe llamarse 2 veces a nvs_set_str y debe devolver ESP_OK
+         *  Debe llamarse a nvs_commit con retorno de ESP_OK
+         *  Por ultimo se llama a nvs_close y no tiene retorno.
+         */
+    esp_err_t  err = flash_mem_save( id, pass);
+    TEST_ASSERT_EQUAL(ESP_OK,err);
+
+}

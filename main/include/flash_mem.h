@@ -4,10 +4,12 @@
 
 
 #include "base.h"
+#include "nvs.h"
+
 // Nombres de los espacios utilizados en memoria flash
 #define SSID_KEY "nombrewifi"
 #define PASSWORD_KEY "wificontraseña"
-
+#define PARTITION_NAME  "storage"
 /**
  * @brief Inicio la memoria nvs
  * 
@@ -50,6 +52,13 @@ esp_err_t flash_memory_clear_credentials();
  */
 esp_err_t flash_mem_deinit();
 
+
+/**
+ * @brief Devuelve el my_handler interno
+ * 
+ * @return nvs_handle_t 
+ */
+nvs_handle_t* get_phandle();
 
 
 #endif

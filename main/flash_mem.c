@@ -10,9 +10,15 @@ static nvs_handle_t my_handle;
 static int flash_inited = 0;
 
 
+
+nvs_handle_t* get_phandle(){
+
+    return &my_handle;
+}
+
 esp_err_t flash_mem_init(){
     esp_err_t err = nvs_flash_init();
-    err = nvs_open("storage", NVS_READWRITE, &my_handle);
+    err = nvs_open(PARTITION_NAME, NVS_READWRITE, &my_handle);
     (err != ESP_OK)?
         printf("Error (%s) opening NVS handle!\n", esp_err_to_name(err))
         :printf("Inicializado correctamente\n");
@@ -28,12 +34,12 @@ esp_err_t flash_mem_save(char* id,char* pass){
     // Guardo ID
     (err != ESP_OK)? 
                     printf("Failed to save SSID!\n")
-                    :printf("guardado correctamente");
+                    :printf("SSID guardado correctamente\n");
     // Guardar Contraseña
     err = nvs_set_str(my_handle, PASSWORD_KEY, pass);
     (err != ESP_OK)? 
                     printf("Failed to save PASS!\n")
-                    :printf("guardado correctamente");
+                    :printf("PASS guardado correctamente\n");
     // Confirmar cambios, si esto no se almacena en flash.
     err = nvs_commit(my_handle);
     (err != ESP_OK)?

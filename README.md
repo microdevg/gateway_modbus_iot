@@ -13,6 +13,17 @@ Este prototipo está basado en los siguientes repositorios:
 
 
 
+### Correr las pruebas
+
+
+Para correr las pruebas en un entornos docker, primero se debe instalar docker, luego inicializarlo y por ultimo:
+```bash
+    # Inicio el contenedor docker
+    docker run -it --rm -v ${PWD}:/home/dev/project throwtheswitch/madsciencelab
+```
+
+
+
 ### Frontedn simple con python en entorno virtual
 
 En la carpeta frontend se encuenta el programa client.py que sirve para realizar pruebas. El mismo depende de paho-mqtt.

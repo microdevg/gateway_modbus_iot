@@ -18,13 +18,8 @@ Este prototipo está basado en los siguientes repositorios:
 
 Para correr las pruebas en un entornos docker, primero se debe instalar docker, luego inicializarlo y por ultimo:
 ```bash
-    # Inicio el contenedor docker
+    # Inicio el contenedor docker e instalar gcovr
     # Necesitas ser user root
-    docker run -it --rm -v ${PWD}:/home/dev/project throwtheswitch/madsciencelab
-    # Installo gcovr para generar informes de cobertura
-    apt update && apt install -y gcovr
-
-# O un atajo
 docker run -it --rm -v ${PWD}:/home/dev/project -u root throwtheswitch/madsciencelab bash -c "apt update && apt install -y gcovr && bash"
 
 
@@ -39,7 +34,11 @@ Obtengo la cobertura de los test con:
 ```
 Esto genera un informa en formato html en : `build/artifacts/gcov/gcovr`
 
-
+### ERROR al iniciar Ceedling
+ Config path :paths  :support => 'test/support' does not exist in the filesystem. Se soluciona creando una carpeta support dentro de test:
+ ```bash
+    mkdir test\support
+ ```
 
 
 ### Frontedn simple con python en entorno virtual

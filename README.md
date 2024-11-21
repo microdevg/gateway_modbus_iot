@@ -19,9 +19,15 @@ Este prototipo está basado en los siguientes repositorios:
 Para correr las pruebas en un entornos docker, primero se debe instalar docker, luego inicializarlo y por ultimo:
 ```bash
     # Inicio el contenedor docker
+    # Necesitas ser user root
     docker run -it --rm -v ${PWD}:/home/dev/project throwtheswitch/madsciencelab
-    # Si necesitas ser user root
-    #  docker run -it --rm -v ${PWD}:/home/dev/project -u root  throwtheswitch/madsciencelab
+    # Installo gcovr para generar informes de cobertura
+    apt update && apt install -y gcovr
+
+# O un atajo
+docker run -it --rm -v ${PWD}:/home/dev/project -u root throwtheswitch/madsciencelab bash -c "apt update && apt install -y gcovr && bash"
+
+
 ```
 Una vez dentro del contenedor corremos los test con:
 ```bash

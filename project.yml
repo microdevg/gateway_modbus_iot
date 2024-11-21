@@ -54,8 +54,8 @@
   :load_paths: []
   :enabled:
     #- beep                           # beeps when finished, so you don't waste time waiting for ceedling
-    - module_generator                # handy for quickly creating source, header, and test templates
-    #- gcov                           # test coverage using gcov. Requires gcc, gcov, and a coverage analyzer like gcovr
+    #- module_generator                # handy for quickly creating source, header, and test templates
+    - gcov                           # test coverage using gcov. Requires gcc, gcov, and a coverage analyzer like gcovr
     #- bullseye                       # test coverage using bullseye. Requires bullseye for your platform
     #- command_hooks                  # write custom actions to be called at different points during the build process
     #- compile_commands_json_db       # generate a compile_commands.json file
@@ -237,38 +237,12 @@
 # You will need to have gcov and gcovr both installed to make it work.
 # For more information on these options, see docs in plugins/gcov
 :gcov:
-  :utilities:
-    - gcovr           # Use gcovr to create the specified reports (default).
-    #- ReportGenerator # Use ReportGenerator to create the specified reports.
-  :reports: # Specify one or more reports to generate.
-    # Make an HTML summary report.
-    - HtmlBasic
-    # - HtmlDetailed
-    # - Text
-    # - Cobertura
-    # - SonarQube
-    # - JSON
-    # - HtmlInline
-    # - HtmlInlineAzure
-    # - HtmlInlineAzureDark
-    # - HtmlChart
-    # - MHtml
-    # - Badges
-    # - CsvSummary
-    # - Latex
-    # - LatexSummary
-    # - PngChart
-    # - TeamCitySummary
-    # - lcov
-    # - Xml
-    # - XmlSummary
+  :reports:
+    - HtmlDetailed
+    - Cobertura
   :gcovr:
-    # :html_artifact_filename: TestCoverageReport.html
-    # :html_title: Test Coverage Report
     :html_medium_threshold: 75
     :html_high_threshold: 90
-    # :html_absolute_paths: TRUE
-    # :html_encoding: UTF-8
 
 # :module_generator:
 #   :project_root: ./

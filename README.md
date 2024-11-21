@@ -20,7 +20,19 @@ Para correr las pruebas en un entornos docker, primero se debe instalar docker, 
 ```bash
     # Inicio el contenedor docker
     docker run -it --rm -v ${PWD}:/home/dev/project throwtheswitch/madsciencelab
+    # Si necesitas ser user root
+    #  docker run -it --rm -v ${PWD}:/home/dev/project -u root  throwtheswitch/madsciencelab
 ```
+Una vez dentro del contenedor corremos los test con:
+```bash
+    ceedling test:all
+```
+Obtengo la cobertura de los test con:
+```bash
+    ceedling gcov:all
+```
+Esto genera un informa en formato html en : `build/artifacts/gcov/gcovr`
+
 
 
 
